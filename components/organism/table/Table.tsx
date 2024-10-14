@@ -1,15 +1,19 @@
 'use client'
 import React, { MouseEvent, useEffect, useState } from 'react'
 
+type rowType = null | number
+
 type dataType = [
-    
+    rowType[],
+    rowType[],
+    rowType[]
 ]
 
 const Table = () => {
     const [tarn, setTarn] = useState(1)
     const [resultFlg, setResultFlg] = useState(false)
     // 1: ○, 2: ×, null
-    const [data, setData] = useState([
+    const [data, setData] = useState<dataType>([
         [null, null, null],
         [null, null, null],
         [null, null, null]
@@ -28,7 +32,7 @@ const Table = () => {
         const x: number = Number(target.dataset.x)
         const y: number = Number(target.dataset.y)
         if(data[x][y] !== null) return
-        let tempData = [...data]
+        const tempData: dataType = [...data]
         tempData[x][y] = tarn
         setData([...tempData]) 
         if(isResultJudge(tempData)) {
@@ -41,7 +45,7 @@ const Table = () => {
             setTarn(1)
         }
     }
-    const isResultJudge = (arr: any) => {
+    const isResultJudge = (arr: dataType) => {
         // ベースケース
         if(arr[1][0] === null && arr[1][1] === null && arr[1][2] === null && arr[0][1] && arr[2][1]) {
             return false
