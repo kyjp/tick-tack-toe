@@ -59,13 +59,14 @@ const Table = () => {
         for(let i = 0; i < 3; i++) {
             if(arr[i][0] === arr[i][1] && arr[i][1] === arr[i][2] || arr[0][i] === arr[1][i] && arr[1][i] === arr[2][i]) {
                 flg = true
-                return true
+                break
             }
         }
         return flg
     }
     return (
         <section>
+            {resultFlg ? `${tarn === 1 ? "○" : "×"}の勝利です` : ""}
             <table>
                 <tbody>
                     {data.map((arr, index) => (
